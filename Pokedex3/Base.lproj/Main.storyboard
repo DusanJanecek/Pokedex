@@ -30,14 +30,18 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="1IV-hM-eaN"/>
                                 </constraints>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
                             </searchBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bp" translatesAutoresizingMaskIntoConstraints="NO" id="wdQ-ua-QdE">
                                 <rect key="frame" x="0.0" y="121" width="375" height="546"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="L3A-Ds-GDb">
                                 <rect key="frame" x="20" y="141" width="335" height="506"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5JR-JG-q2J">
                                     <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -45,7 +49,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="CkW-Gj-9Qy">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PokeCell" id="CkW-Gj-9Qy" customClass="PokeCell" customModule="Pokedex3" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -67,6 +71,7 @@
                                                 </label>
                                             </subviews>
                                         </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Z3q-E3-wP9" firstAttribute="leading" secondItem="CkW-Gj-9Qy" secondAttribute="leading" id="ES4-ib-M8A"/>
                                             <constraint firstItem="4II-vx-lGw" firstAttribute="top" secondItem="Z3q-E3-wP9" secondAttribute="bottom" id="Jfe-W9-tqJ"/>
@@ -76,6 +81,10 @@
                                             <constraint firstItem="4II-vx-lGw" firstAttribute="leading" secondItem="CkW-Gj-9Qy" secondAttribute="leading" id="ud9-2J-oCv"/>
                                             <constraint firstItem="Z3q-E3-wP9" firstAttribute="top" secondItem="CkW-Gj-9Qy" secondAttribute="top" id="ukH-nC-8c8"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="pokeImage" destination="Z3q-E3-wP9" id="kfD-hQ-bTN"/>
+                                            <outlet property="pokeLabel" destination="4II-vx-lGw" id="PAg-nQ-fsA"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -99,6 +108,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="L3A-Ds-GDb" id="iuL-6C-ncx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
