@@ -12,15 +12,20 @@ import AVFoundation
 class ViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var musicPlayer: AVAudioPlayer!
     
     var pokemons = [Pokemon]()
-    var musicPlayer: AVAudioPlayer!
+    var filteredPokemons = [Pokemon]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        searchBar.delegate = self
         
         parsePokemonCSV()
         initAudio()
@@ -35,7 +40,7 @@ class ViewController: UIViewController {
             musicPlayer = try AVAudioPlayer(contentsOf: URL(string: path)!)
             musicPlayer.prepareToPlay()
             musicPlayer.numberOfLoops = -1
-            musicPlayer.play()
+//            musicPlayer.play()
             
         } catch let err as NSError {
             print(err.debugDescription)
@@ -59,6 +64,7 @@ class ViewController: UIViewController {
                 pokemons.append(poke)
             }
             
+            filteredPokemons = pokemons
             
         } catch let err as NSError {
             print(err)
@@ -88,14 +94,15 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pokemons.count
+        
+        return filteredPokemons.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
        
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokeCell", for: indexPath) as? PokeCell {
             
-            let pokemon = pokemons[indexPath.row]
+            let pokemon = filteredPokemons[indexPath.row]
             cell.configureCell(pokemon: pokemon)
             
             return cell
@@ -107,6 +114,26 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 100)
+    }
+    
+}
+
+extension ViewController: UISearchBarDelegate {
+    
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+       
+        if searchBar.text == "" || searchBar.text == nil {
+            
+            filteredPokemons = pokemons
+            
+        } else {
+            
+            let filter = searchBar.text!.lowercased()
+            filteredPokemons = pokemons.filter({$0.name.hasPrefix(filter)})
+            
+        }
+        
+        collectionView.reloadData()
     }
     
 }

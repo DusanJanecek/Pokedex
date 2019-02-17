@@ -15,7 +15,7 @@ class Pokemon {
     
     var name: String {
         get {
-            return _name.capitalized
+            return _name
         }
     }
     

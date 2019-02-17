@@ -142,6 +142,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="L3A-Ds-GDb" id="iuL-6C-ncx"/>
+                        <outlet property="searchBar" destination="uSy-cJ-HV5" id="ShT-s1-027"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
