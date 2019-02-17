@@ -84,6 +84,15 @@ class ViewController: UIViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PokemonDetailVC" {
+            if let destinationVC = segue.destination as? PokemonDetailVC {
+                if let pokemon = sender as? Pokemon {
+                    destinationVC.pokemon = pokemon
+                }
+            }
+        }
+    }
 
 }
 
@@ -114,6 +123,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 100)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let pokemon = filteredPokemons[indexPath.row]
+        
+        performSegue(withIdentifier: "PokemonDetailVC", sender: pokemon)
     }
     
 }
