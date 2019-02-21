@@ -29,5 +29,6 @@ class PokemonDetailVC: UIViewController {
         nameLabel.text = _pokemon.name
     }
     
+    
 
 }
